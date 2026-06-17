@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-cream text-ink font-body antialiased;
+  overflow-x: hidden;
+}
+
+/* Warm summer background wash */
+.bg-summer {
+  background:
+    radial-gradient(60% 50% at 12% 0%, rgba(246, 183, 8, 0.18) 0%, transparent 60%),
+    radial-gradient(55% 45% at 95% 8%, rgba(155, 81, 224, 0.16) 0%, transparent 60%),
+    radial-gradient(50% 50% at 50% 100%, rgba(236, 106, 14, 0.1) 0%, transparent 70%),
+    #FFF8EE;
+}
+
+.text-gradient {
+  background: linear-gradient(95deg, #EC6A0E 0%, #F6B708 45%, #9B51E0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.accent-rule {
+  background: linear-gradient(90deg, #EC6A0E, #9B51E0);
+}
+
+/* Hand-drawn-ish bubble tail */
+.bubble-tail::after {
+  content: "";
+  position: absolute;
+  bottom: -14px;
+  left: 34px;
+  width: 26px;
+  height: 26px;
+  background: inherit;
+  border-bottom-left-radius: 24px;
+  transform: rotate(-12deg);
+}
+
+@keyframes float-up {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes float-down {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+
+.marquee-up {
+  animation: float-up var(--dur, 32s) linear infinite;
+}
+.marquee-down {
+  animation: float-down var(--dur, 38s) linear infinite;
+}
+
+@keyframes marquee-x {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-x {
+  animation: marquee-x 28s linear infinite;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+  50% { transform: translateY(-10px) rotate(var(--rot, 0deg)); }
+}
+.animate-bob {
+  animation: bob var(--bob, 6s) ease-in-out infinite;
+}
+
+@keyframes scroll-hint {
+  0% { transform: translateY(-100%); opacity: 0; }
+  40% { opacity: 1; }
+  100% { transform: translateY(180%); opacity: 0; }
+}
+.scroll-hint {
+  animation: scroll-hint 1.7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-up, .marquee-down, .animate-bob, .scroll-hint { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+::selection {
+  background: rgba(155, 81, 224, 0.25);
+}
