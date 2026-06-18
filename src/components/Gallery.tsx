@@ -42,6 +42,11 @@ const photos: GalleryItem[] = [
     type: "video",
   },
   {
+    src: "/assets/leiri-video-2.mp4",
+    caption: "Toinen videotervehdys leiriltä",
+    type: "video",
+  },
+  {
     src: "/assets/makkaranpaisto.avif",
     caption: "Makkaranpaisto nuotiolla",
   },
