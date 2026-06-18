@@ -1,7 +1,13 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-const photos = [
+type GalleryItem = {
+  src: string;
+  caption: string;
+  type?: "image" | "video";
+};
+
+const photos: GalleryItem[] = [
   {
     src: "/assets/leiri-opettajat.avif",
     caption: "Leirin sydän — opettajat ja ohjaajat",
@@ -29,6 +35,11 @@ const photos = [
   {
     src: "/assets/iltanuotio.avif",
     caption: "Iltanuotion äärellä",
+  },
+  {
+    src: "/assets/leiri-video.mp4",
+    caption: "Leiritunnelmaa videolta",
+    type: "video",
   },
   {
     src: "/assets/makkaranpaisto.avif",
@@ -164,6 +175,8 @@ export default function Gallery() {
   const [active, setActive] = useState(0);
   const [zoomed, setZoomed] = useState<number | null>(null);
   const stageRef = useRef<HTMLDivElement>(null);
+  const carouselVideoRefs = useRef<Record<number, HTMLVideoElement | null>>({});
+  const lightboxVideoRef = useRef<HTMLVideoElement | null>(null);
   const [stageW, setStageW] = useState(0);
 
   // Measure the stage so every transform can be expressed in real pixels.
@@ -203,6 +216,31 @@ export default function Gallery() {
     return () => {
       document.body.style.overflow = "";
     };
+  }, [zoomed]);
+
+  useEffect(() => {
+    Object.entries(carouselVideoRefs.current).forEach(([key, video]) => {
+      if (!video) return;
+
+      const index = Number(key);
+      const shouldPlay = zoomed === null && index === active;
+
+      if (shouldPlay) {
+        const playPromise = video.play();
+        if (playPromise) playPromise.catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, [active, zoomed]);
+
+  useEffect(() => {
+    if (zoomed === null || photos[zoomed].type !== "video" || !lightboxVideoRef.current) {
+      return;
+    }
+
+    const playPromise = lightboxVideoRef.current.play();
+    if (playPromise) playPromise.catch(() => {});
   }, [zoomed]);
 
   // Responsive card geometry derived from the measured stage width.
@@ -278,13 +316,27 @@ export default function Gallery() {
                   }}
                   transition={{ type: "spring", stiffness: 220, damping: 28, mass: 0.9 }}
                 >
-                  <img
-                    src={p.src}
-                    alt={p.caption}
-                    draggable={false}
-                    loading={Math.abs(offset) <= 1 ? "eager" : "lazy"}
-                    className="block h-full w-full object-cover object-top"
-                  />
+                  {p.type === "video" ? (
+                    <video
+                      ref={(node) => {
+                        carouselVideoRefs.current[i] = node;
+                      }}
+                      src={p.src}
+                      muted
+                      loop
+                      playsInline
+                      preload={Math.abs(offset) <= 1 ? "auto" : "metadata"}
+                      className="block h-full w-full object-cover object-top"
+                    />
+                  ) : (
+                    <img
+                      src={p.src}
+                      alt={p.caption}
+                      draggable={false}
+                      loading={Math.abs(offset) <= 1 ? "eager" : "lazy"}
+                      className="block h-full w-full object-cover object-top"
+                    />
+                  )}
                   {/* Darken side cards so the centre pops */}
                   <motion.div
                     className="pointer-events-none absolute inset-0 bg-grape-deep"
@@ -426,12 +478,24 @@ export default function Gallery() {
                 transition={{ type: "spring", stiffness: 200, damping: 20, mass: 0.9 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                <img
-                  src={photos[zoomed].src}
-                  alt={photos[zoomed].caption}
-                  draggable={false}
-                  className="block max-h-[85vh] w-auto max-w-[92vw] object-contain"
-                />
+                {photos[zoomed].type === "video" ? (
+                  <video
+                    ref={lightboxVideoRef}
+                    src={photos[zoomed].src}
+                    controls
+                    autoPlay
+                    loop
+                    playsInline
+                    className="block max-h-[85vh] w-auto max-w-[92vw] object-contain"
+                  />
+                ) : (
+                  <img
+                    src={photos[zoomed].src}
+                    alt={photos[zoomed].caption}
+                    draggable={false}
+                    className="block max-h-[85vh] w-auto max-w-[92vw] object-contain"
+                  />
+                )}
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-grape-deep/80 to-transparent p-6">
                   <figcaption className="font-head text-sm uppercase tracking-[0.12em] text-white sm:text-base">
                     {photos[zoomed].caption}
