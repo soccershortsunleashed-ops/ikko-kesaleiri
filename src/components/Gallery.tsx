@@ -3,48 +3,148 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const photos = [
   {
-    src: "/assets/leiri-opettajat.jpeg",
+    src: "/assets/leiri-opettajat.avif",
     caption: "Leirin sydän — opettajat ja ohjaajat",
   },
   {
-    src: "/assets/koko-porukka.jpeg",
+    src: "/assets/koko-porukka.avif",
     caption: "Koko porukka koolla",
   },
   {
-    src: "/assets/laituri-jarvi.jpeg",
+    src: "/assets/laituri-jarvi.avif",
     caption: "Hetki laiturilla järven rannalla",
   },
   {
-    src: "/assets/leiri-luonto.jpeg",
+    src: "/assets/leiri-luonto.avif",
     caption: "Punkaharjun kukkiva kesä",
   },
   {
-    src: "/assets/pihapelit-koyenveto.jpeg",
+    src: "/assets/pihapelit-koyenveto.avif",
     caption: "Pihapelit ja yhteishenki",
   },
   {
-    src: "/assets/kasityopaja.jpeg",
+    src: "/assets/kasityopaja.avif",
     caption: "Käsityöpajassa",
   },
   {
-    src: "/assets/iltanuotio.jpeg",
+    src: "/assets/iltanuotio.avif",
     caption: "Iltanuotion äärellä",
   },
   {
-    src: "/assets/makkaranpaisto.jpeg",
+    src: "/assets/makkaranpaisto.avif",
     caption: "Makkaranpaisto nuotiolla",
   },
   {
-    src: "/assets/taidepaja.jpeg",
+    src: "/assets/taidepaja.avif",
     caption: "Taidepaja täydessä vauhdissa",
   },
   {
-    src: "/assets/luova-puuha.jpeg",
+    src: "/assets/luova-puuha.avif",
     caption: "Luovaa puuhaa yhdessä",
   },
   {
-    src: "/assets/palkintojenjako.jpeg",
+    src: "/assets/palkintojenjako.avif",
     caption: "Palkintojenjako — ansaitut mitalit",
+  },
+  {
+    src: "/assets/saapuminen.avif",
+    caption: "Saapuminen leirille — matkalaukut valmiina",
+  },
+  {
+    src: "/assets/paarakennus.avif",
+    caption: "Leirin lämmin päärakennus",
+  },
+  {
+    src: "/assets/paarakennus-aula.avif",
+    caption: "Päärakennuksen tunnelmallinen aula",
+  },
+  {
+    src: "/assets/majoitushuone.avif",
+    caption: "Kodikas majoitushuone",
+  },
+  {
+    src: "/assets/oppitunti.avif",
+    caption: "Oppitunti suomen kielen parissa",
+  },
+  {
+    src: "/assets/ruokasali.avif",
+    caption: "Yhteinen ruokahetki salissa",
+  },
+  {
+    src: "/assets/noutopoyta.avif",
+    caption: "Maukasta ruokaa noutopöydästä",
+  },
+  {
+    src: "/assets/taikinan-teko.avif",
+    caption: "Lettutaikina valmistumassa",
+  },
+  {
+    src: "/assets/lettuja-keittiossa.avif",
+    caption: "Lettuja paistamassa yhdessä",
+  },
+  {
+    src: "/assets/lettujen-paisto.avif",
+    caption: "Oma lettu kääntyy pannulla",
+  },
+  {
+    src: "/assets/keittiossa-yhdessa.avif",
+    caption: "Keittiössä hyvällä mielellä",
+  },
+  {
+    src: "/assets/kangaspuut.avif",
+    caption: "Kangaspuiden ääressä",
+  },
+  {
+    src: "/assets/kangaskassit.avif",
+    caption: "Itse koristellut kangaskassit",
+  },
+  {
+    src: "/assets/kangaskassit-2.avif",
+    caption: "Kassit täynnä omia kuvioita",
+  },
+  {
+    src: "/assets/ulkopelit.avif",
+    caption: "Ulkopelit pihanurmella",
+  },
+  {
+    src: "/assets/lautapelit.avif",
+    caption: "Lautapelejä ja hyvää juttua",
+  },
+  {
+    src: "/assets/ryhmatoiminta.avif",
+    caption: "Yhteistä puuhaa salissa",
+  },
+  {
+    src: "/assets/uintia-jarvessa.avif",
+    caption: "Uintia kirkkaassa järvessä",
+  },
+  {
+    src: "/assets/makkaranpaisto-rannalla.avif",
+    caption: "Makkaranpaisto järven rannalla",
+  },
+  {
+    src: "/assets/polku-laiturille.avif",
+    caption: "Polku laiturille koivujen lomitse",
+  },
+  {
+    src: "/assets/museovierailu.avif",
+    caption: "Vierailu museossa",
+  },
+  {
+    src: "/assets/retki-kaupungilla.avif",
+    caption: "Retkellä kaupungilla",
+  },
+  {
+    src: "/assets/ryhma-patsaalla.avif",
+    caption: "Ryhmäkuva patsaan luona",
+  },
+  {
+    src: "/assets/olavinlinna-jarvelta.avif",
+    caption: "Olavinlinna järven takaa",
+  },
+  {
+    src: "/assets/ryhmakuva-linna.avif",
+    caption: "Koko porukka Olavinlinnan edessä",
   },
 ];
 
