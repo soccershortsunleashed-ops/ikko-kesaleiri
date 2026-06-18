@@ -145,7 +145,7 @@ export const snippets: string[] = [
 
 export const stats = [
   { value: "2", label: "Leiriviikkoa" },
-  { value: "10–16", label: "Vuotiaita leiriläisiä" },
+  { value: "7–17", label: "Vuotiaita leiriläisiä" },
   { value: "15 h", label: "Ohjaajien sydäntä joka päivä" },
   { value: "∞", label: "Uutta ystävyyttä" },
 ];
